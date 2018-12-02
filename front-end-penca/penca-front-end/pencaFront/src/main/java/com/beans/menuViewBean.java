@@ -15,19 +15,20 @@ import javax.faces.bean.SessionScoped;
  */
 @Named(value = "menuViewBean")
 @SessionScoped
-public class menuViewBean implements Serializable{
+public class menuViewBean implements Serializable {
 
     /**
      * Creates a new instance of menuViewBean
      */
     public menuViewBean() {
     }
-    public String processPage1() {       
-      return "page";    
-   }  
-   
-   public String processPage2() {       
-      return "page";    
-   }
-    
+
+    public String processPage1() {
+        return "page";
+    }
+
+    public String processPage2() {
+        return "page";
+    }
+
 }

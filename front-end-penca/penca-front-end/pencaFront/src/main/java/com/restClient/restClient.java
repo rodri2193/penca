@@ -21,15 +21,16 @@ import javax.ws.rs.core.Response;
  * @author notebook
  */
 public class restClient {
+
     private static final Logger LOGGER = Logger.getLogger(restClient.class.getName());
-    
+
     private restClient() {
     }
-    
+
     public static WebTarget getWebTarget(String service) {
         Client client = getClient();
-        WebTarget target = client.target(constantes.url+"/"+service+"/");
-       
+        WebTarget target = client.target(constantes.url + "/" + service + "/");
+
         return target;
     }
 
@@ -38,15 +39,15 @@ public class restClient {
         //client.register( ClientTracingFeature.class );
         return client;
     }
-    
-    public static <T> T invokeGet(WebTarget webTarget,Class<T> responseType, String primaryKey)  {
-        Response response = webTarget.queryParam("pk", primaryKey).request(MediaType.APPLICATION_JSON).get(); 
-        
-        return respond(response, responseType);   
+
+    public static <T> T invokeGet(WebTarget webTarget, Class<T> responseType, String primaryKey) {
+        Response response = webTarget.queryParam("pk", primaryKey).request(MediaType.APPLICATION_JSON).get();
+
+        return respond(response, responseType);
     }
-    
-    public static <T> T respond(Response response, Class<T> responseType)  {
-        if (responseType == null){
+
+    public static <T> T respond(Response response, Class<T> responseType) {
+        if (responseType == null) {
             return null;
         } else if (responseType.isArray()) {
             return (T) response.readEntity(new GenericType<>(responseType));

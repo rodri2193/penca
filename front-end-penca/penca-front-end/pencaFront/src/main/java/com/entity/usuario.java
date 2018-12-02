@@ -14,13 +14,13 @@ import java.io.Serializable;
  * @author notebook
  */
 public class usuario implements Serializable {
-    
+
     private String usuario_pk;
     private String codigo;
     private List<penca> pencas;
-    
-    public usuario(){
-        pencas=new ArrayList();
+
+    public usuario() {
+        pencas = new ArrayList();
     }
 
     public String getUsuario_pk() {
@@ -46,5 +46,5 @@ public class usuario implements Serializable {
     public void setPencas(List<penca> pencas) {
         this.pencas = pencas;
     }
-    
+
 }

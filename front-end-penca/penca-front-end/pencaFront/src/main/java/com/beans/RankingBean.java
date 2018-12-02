@@ -5,6 +5,7 @@
  */
 package com.beans;
 
+import com.entity.penca;
 import com.entity.posicion;
 import com.entity.ranking;
 import com.restClient.apuestaRestClient;
@@ -27,44 +28,54 @@ import org.omnifaces.cdi.Param;
 @Named
 @ViewScoped
 public class RankingBean implements Serializable {
-    
-   @Inject
-   @Param(name = "pencapk")
-   private String pencapk;
-   
-   @Inject
+
+    @Inject
+    @Param(name = "pencapk")
+    private String pencapk;
+
+    @Inject
     private rankingRestClient rankingRestClient;
-   
-   @Inject
+
+    @Inject
     private UsuarioBean sessionBean;
-   
-   private String usuariopk;
-   private posicion Posicion;
-   private List<ranking> listRanking= new ArrayList();
-   private Integer paginador=0;
-   
-   public RankingBean(){       
-   }
-   
-   @PostConstruct
-    public void init() {  
-        usuariopk=sessionBean.getUsuarioPk();
-      //  Posicion=rankingRestClient.buscarPosicionUsuario(pencapk, usuariopk);
-        listRanking=rankingRestClient.buscarListaRanking("2", paginador, paginador+10);
+
+    private String usuariopk;
+    private posicion Posicion;
+    private List<ranking> listRanking = new ArrayList();
+    private Integer paginador = 0;
+
+    public RankingBean() {
     }
-    
-    public void paginadorMas(){
-        if(!(listRanking.size()<10)){
-            paginador=paginador+10;
-            listRanking=rankingRestClient.buscarListaRanking(pencapk, paginador, paginador+10);
+
+    @PostConstruct
+    public void init() {
+        
+          Posicion=rankingRestClient.buscarPosicionUsuario(pencapk, "\""+sessionBean.getUsuarioPk()+"\"");
+          listRanking = rankingRestClient.buscarListaRanking(pencapk, paginador, paginador + 10);
+    }
+
+    public void paginadorMas() {
+        if (!(listRanking.size() < 10)) {
+            paginador = paginador + 10;
+            listRanking = rankingRestClient.buscarListaRanking(pencapk, paginador, paginador + 10);
+        }
+    }
+
+    public void paginadorMenos() {
+        if (paginador != 0) {
+            paginador = paginador - 10;
+            listRanking = rankingRestClient.buscarListaRanking(pencapk, paginador, paginador + 10);
         }
     }
     
-    public void paginadorMenos(){
-        if(paginador!=0){
-            paginador=paginador-10;
-            listRanking=rankingRestClient.buscarListaRanking(pencapk, paginador, paginador+10);
+    public String obtenerPosicion(penca Penca){
+        Logger.getLogger(PencaBean.class.getName()).log(Level.SEVERE, "Pencau: " +Penca.getPenca_pk() );
+        posicion pos= rankingRestClient.buscarPosicionUsuario(Penca.getPenca_pk(), "\""+"Rodrigo"+"\"");
+        if(pos!=null){
+            return pos.getPosicion();
         }
+        
+        return null;
     }
 
     public String getPencapk() {
@@ -106,6 +117,5 @@ public class RankingBean implements Serializable {
     public void setPaginador(Integer paginador) {
         this.paginador = paginador;
     }
-    
-    
+
 }

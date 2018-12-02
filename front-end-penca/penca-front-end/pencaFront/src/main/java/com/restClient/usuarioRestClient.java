@@ -25,9 +25,9 @@ public class usuarioRestClient implements Serializable {
 
     public usuario obtenerPorId(String usuario_pk) {
         WebTarget webTarget = restClient.getWebTarget("usuario");
-        usuario usu=new usuario();
-        usu = restClient.invokeGet(webTarget,usuario.class,usuario_pk);
-       
+        usuario usu = new usuario();
+        usu = restClient.invokeGet(webTarget, usuario.class, usuario_pk);
+
         return usu;
     }
 }

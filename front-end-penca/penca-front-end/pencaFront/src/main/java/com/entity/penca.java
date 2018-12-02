@@ -4,20 +4,21 @@
  * and open the template in the editor.
  */
 package com.entity;
+
 import java.io.Serializable;
+
 /**
  *
  * @author notebook
  */
+public class penca implements Serializable {
 
-public class penca  implements Serializable {
-    
     private String penca_pk;
     private String codigo;
     private String campeonato_fk;
-    
-    public penca(){
-        
+
+    public penca() {
+
     }
 
     public String getPenca_pk() {
@@ -43,5 +44,5 @@ public class penca  implements Serializable {
     public void setCampeonato_fk(String campeonato_fk) {
         this.campeonato_fk = campeonato_fk;
     }
-        
+
 }

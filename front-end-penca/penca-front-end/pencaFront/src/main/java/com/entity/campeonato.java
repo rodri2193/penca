@@ -4,22 +4,23 @@
  * and open the template in the editor.
  */
 package com.entity;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  *
  * @author notebook
  */
+public class campeonato implements Serializable {
 
-public class campeonato  implements Serializable {
-    
     private String campeonato_pk;
     private String codigo;
     private List<partido> partidos;
-    
-    public campeonato(){
-        partidos=new ArrayList();
+
+    public campeonato() {
+        partidos = new ArrayList();
     }
 
     public String getCampeonato_pk() {
@@ -30,7 +31,6 @@ public class campeonato  implements Serializable {
         this.campeonato_pk = campeonato_pk;
     }
 
-    
     public String getCodigo() {
         return codigo;
     }
@@ -46,5 +46,5 @@ public class campeonato  implements Serializable {
     public void setPartidos(List<partido> partidos) {
         this.partidos = partidos;
     }
-        
+
 }

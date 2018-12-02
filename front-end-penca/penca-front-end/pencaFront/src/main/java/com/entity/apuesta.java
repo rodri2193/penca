@@ -12,15 +12,15 @@ import java.io.Serializable;
  * @author notebook
  */
 public class apuesta implements Serializable {
-    
+
     String pencaid;
     String usuario;
     String partido;
     Integer res1;
     Integer res2;
-    
-    public void apuesta(){
-        
+
+    public void apuesta() {
+
     }
 
     public String getPencaid() {
@@ -67,5 +67,5 @@ public class apuesta implements Serializable {
     public String toString() {
         return "{" + "\"pencaid\":\"" + pencaid + "\", \"usuario\":\"" + usuario + "\",\"partido\":\"" + partido + "\",\"res1\":" + res1 + ",\"res2\":" + res2 + '}';
     }
-    
+
 }

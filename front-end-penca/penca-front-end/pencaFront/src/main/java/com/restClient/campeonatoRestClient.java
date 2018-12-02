@@ -26,9 +26,9 @@ public class campeonatoRestClient implements Serializable {
 
     public campeonato obtenerPorId(String campeonato_pk) {
         WebTarget webTarget = restClient.getWebTarget("campeonato");
-        campeonato camp= new campeonato();
-        camp = restClient.invokeGet(webTarget,campeonato.class,campeonato_pk);
-       
+        campeonato camp = new campeonato();
+        camp = restClient.invokeGet(webTarget, campeonato.class, campeonato_pk);
+
         return camp;
     }
 }

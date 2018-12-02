@@ -5,22 +5,23 @@
  * and open the template in the editor.
  */
 package com.entity;
+
 import java.io.Serializable;
 import java.time.LocalDate;
+
 /**
  *
  * @author notebook
  */
+public class partido implements Serializable {
 
-public class partido  implements Serializable {
-    
     private String partido_pk;
     private String cuadro1;
     private String cuadro2;
     private String fecha;
-    
-    public partido(){
-        
+
+    public partido() {
+
     }
 
     public String getPartido_pk() {
@@ -60,7 +61,4 @@ public class partido  implements Serializable {
         return "partido{" + "partido_pk=" + partido_pk + ", cuadro1=" + cuadro1 + ", cuadro2=" + cuadro2 + ", fecha=" + fecha + '}';
     }
 
-   
- 
 }
-

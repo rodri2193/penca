@@ -22,90 +22,92 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.PrimeFaces;
 import org.omnifaces.cdi.Param;
+
 /**
  *
  * @author notebook
  */
-
 @Named
 @ViewScoped
 public class PencaBean implements Serializable {
-      
-   @Inject
-   @Param(name = "pk")
-   private String pk;
-   
-   
-   @Inject
-   @Param(name = "pencapk")
-   private String pencapk;
 
-   
+    @Inject
+    @Param(name = "pk")
+    private String pk;
+
+    @Inject
+    @Param(name = "pencapk")
+    private String pencapk;
+
     @Inject
     private campeonatoRestClient restClient;
-    
+
     @Inject
     private apuestaRestClient apuestaRestClient;
-    
+
     @Inject
     private UsuarioBean sessionBean;
-   
-          
+
     private campeonato campeonatoEnEdicion;
     private apuesta apuestaEnEdicion;
     private partido partidoEnEdicion;
     private String usuariopk;
-    private List<apuestaRealizada> apuestasRealizadas=new ArrayList();
+    private List<apuestaRealizada> apuestasRealizadas = new ArrayList();
+
     /**
      * Creates a new instance of UsuarioBean
      */
     public PencaBean() {
     }
-    
+
     @PostConstruct
-    public void init() {  
-          buscar();
+    public void init() {
+        buscar();
     }
     
-    public void buscar(){
-        usuariopk=sessionBean.getUsuarioPk();
-        campeonatoEnEdicion=restClient.obtenerPorId(pk);
-        apuestasRealizadas=apuestaRestClient.buscar(pencapk, usuariopk);
+  
+
+    public void buscar() {
+        usuariopk = sessionBean.getUsuarioPk();
+        campeonatoEnEdicion = restClient.obtenerPorId(pk);
+        apuestasRealizadas = apuestaRestClient.buscar(pencapk, usuariopk);
     }
-    
-    public void generarApuesta(partido Partido){
-        partidoEnEdicion=Partido;
-        apuestaEnEdicion=new apuesta();
+
+    public void generarApuesta(partido Partido) {
+        
+        partidoEnEdicion = Partido;
+        apuestaEnEdicion = new apuesta();
         apuestaEnEdicion.setUsuario(usuariopk);
         apuestaEnEdicion.setPencaid(pencapk);
         apuestaEnEdicion.setPartido(Partido.getPartido_pk());
-        
+
     }
-        
-    public void guardarApuesta(){
-      //  apuestaRestClient.crearApuesta(apuestaEnEdicion);   //METODO PARA LLAMAR A SQS
+
+    public void guardarApuesta() {
+        //  apuestaRestClient.crearApuesta(apuestaEnEdicion);   //METODO PARA LLAMAR A SQS
         sessionBean.getApuestasEnSesion().add(apuestaEnEdicion);
-       Logger.getLogger(PencaBean.class.getName()).log(Level.SEVERE, "Sesion bean en guardar: "+sessionBean.getApuestasEnSesion().size());
-               
+        Logger.getLogger(PencaBean.class.getName()).log(Level.SEVERE, "Sesion bean en guardar: " + sessionBean.getApuestasEnSesion().size());
+
         PrimeFaces.current().executeScript("PF('itemDialog').hide()");
     }
-    
-    public String verResultadoPartido(String pkPartido){
-        for(apuestaRealizada apuR: apuestasRealizadas){
-            if(apuR.getPartido().equals(pkPartido)){
-                return apuR.getResultado1()+"-"+apuR.getResultado2();
+
+    public String verResultadoPartido(String pkPartido) {
+        
+        for (apuestaRealizada apuR : apuestasRealizadas) {
+            if (apuR.getPartido().equals(pkPartido)) {
+                return apuR.getResultado1() + "-" + apuR.getResultado2();
             }
         }
-         Logger.getLogger(PencaBean.class.getName()).log(Level.SEVERE, "Sesion bean: "+sessionBean.getApuestasEnSesion().size());
-        if(sessionBean.getApuestasEnSesion()!=null){
-            for(apuesta apuR: sessionBean.getApuestasEnSesion()){
-                Logger.getLogger(PencaBean.class.getName()).log(Level.SEVERE, "Res 1: "+apuR.getRes1());
-                if(apuR.getPartido().equals(pkPartido)){
-                    return apuR.getRes1().toString()+"-"+apuR.getRes2().toString();
+        Logger.getLogger(PencaBean.class.getName()).log(Level.SEVERE, "Sesion bean: " + sessionBean.getApuestasEnSesion().size());
+        if (sessionBean.getApuestasEnSesion() != null) {
+            for (apuesta apuR : sessionBean.getApuestasEnSesion()) {
+                Logger.getLogger(PencaBean.class.getName()).log(Level.SEVERE, "Res 1: " + apuR.getRes1());
+                if (apuR.getPartido().equals(pkPartido) && apuR.getPencaid().equals(pencapk)) {
+                    return apuR.getRes1().toString() + "-" + apuR.getRes2().toString();
                 }
             }
         }
-        
+
         return "";
     }
 
@@ -116,8 +118,6 @@ public class PencaBean implements Serializable {
     public void setPk(String pk) {
         this.pk = pk;
     }
-
-    
 
     public campeonato getCampeonatoEnEdicion() {
         return campeonatoEnEdicion;
@@ -167,11 +167,4 @@ public class PencaBean implements Serializable {
         this.apuestasRealizadas = apuestasRealizadas;
     }
 
-    
-
-    
-
-   
-    
-    
 }

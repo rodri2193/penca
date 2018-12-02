@@ -1,0 +1,58 @@
+body {
+    padding-top: 50px;
+    background:lightgrey;
+    background-image: url("../imagenes/futbol.jpg");
+}
+
+.starter-template {
+    padding: 40px 15px;
+    text-align: center;
+}
+
+.bloque {
+    background-color: gray;
+    color: white;
+    margin: 5px;
+    padding: 90px;
+} 
+
+.jumbotron {
+
+    color: #fff;
+    padding: 100px 25px;
+    background-color: rgba(103, 128, 159, 0.8);
+}
+
+.posicion {
+
+    color: #fff;
+    padding: 25px 25px;
+    background-color: rgba(103, 128, 159, 0.8);
+}
+
+.ui-dialog-titlebar {
+    padding: 2px 16px;
+    background-color: rgba(103, 128, 159, 0.8);
+   
+}
+
+.ui-botton {
+    background-color: rgba(103, 128, 159, 1);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}

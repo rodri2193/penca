@@ -1,28 +1,37 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" 
-      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:o="http://omnifaces.org/ui">
-    
-    <h:head>
-        <title>Greeting</title>
-    </h:head>
-    <h:body>
-        <p:layout fullPage="true">
-
-                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                    Usuario: #{usuarioBean.usuarioEnEdicion.codigo}
-                </p:layoutUnit>
-
-                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
-                    Footer
-                </p:layoutUnit>
-        
-        <c:set var="soloLecturaPersona" value="#{soloLecturaPersona}" scope="request"/>
-        <h:form id="form">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:p="http://primefaces.org/ui"
+      >
+    <ui:composition template="/WEB-INF/include/template.xhtml">
+        <ui:define name="head">
+            <title>Hello JSF Bootstrap</title>
+            <!-- Custom styles for this template -->
+            <h:outputStylesheet name="css/starter-template.css"/>
+        </ui:define>
+        <ui:define name="body">
+            <nav class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">PencasPro</a>
+                    </div>
+                    <div id="navbar" class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </nav>
+            <div class="container">
+                <div class="starter-template">
+                     <h:form id="form">
         <p:dataTable var="partido" value="#{pencaBean.campeonatoEnEdicion.partidos}" >
                         <p:column headerText="Cuadro1">
                             <h:outputText value="#{partido.cuadro1}" />
@@ -33,24 +42,26 @@
                         <p:column headerText="Fecha">
                             <h:outputText value="#{partido.fecha}" />
                         </p:column>
-                        <p:column headerText="Resultado">
+            
+                        <p:column headerText="Resultado" >
                             <h:outputText value="#{pencaBean.verResultadoPartido(partido.partido_pk)}" />
                         </p:column>
                         <p:column >
-                            <p:commandButton update=":form:popupPartido"  value="apostar" oncomplete="PF('itemDialog').show()" action="#{pencaBean.generarApuesta(partido)}"  />
+                            <p:commandButton update="@form"   value="apostar" oncomplete="PF('itemDialog').show()" action="#{pencaBean.generarApuesta(partido)}"  />                            
+                        
                         </p:column>
                 </p:dataTable>
         
-        <p:dialog id="popupPartido" header="Apuesta" widgetVar="itemDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">             
+        <p:dialog id="popupPartido" header="Apuesta" widgetVar="itemDialog" modal="true"  showEffect="fade" hideEffect="fade" resizable="false">             
             <p:outputPanel id="itemDetail">                                                             
                 <h:panelGroup rendered="#{not empty pencaBean.apuestaEnEdicion}" >                                 
-                         <p:outputPanel id="fila_input_cuadro1" >                        
+                     <p:outputPanel id="fila_input_cuadro1" styleClass="row" >                        
                              #{pencaBean.partidoEnEdicion.cuadro1}                   
                             <p:outputPanel styleClass="col-sm-9">                            
                                 <h:inputText autocomplete="off" id="input_resCuadro1"  value="#{pencaBean.apuestaEnEdicion.res1}"/>                        
                             </p:outputPanel>                    
                         </p:outputPanel>
-                        <p:outputPanel id="fila_input_cuadro2" >                        
+                        <p:outputPanel id="fila_input_cuadro2" styleClass="row" >                        
                              #{pencaBean.partidoEnEdicion.cuadro2}                      
                             <p:outputPanel styleClass="col-sm-9">                            
                                 <h:inputText autocomplete="off" id="input_resCuadro2" value="#{pencaBean.apuestaEnEdicion.res2}"/>                        
@@ -69,7 +80,8 @@
             </p:outputPanel>        
         </p:dialog> 
        </h:form> 
-        </p:layout>
-    </h:body>
+                </div>
+            </div><!-- /.container -->
+        </ui:define>
+    </ui:composition> 
 </html>
-

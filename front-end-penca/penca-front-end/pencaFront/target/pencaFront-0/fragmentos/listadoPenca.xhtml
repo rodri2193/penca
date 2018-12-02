@@ -1,37 +1,62 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        <h:form>
-            
-            <p:panel id="panelPencas" rendered="#{usuarioBean.usuarioEnEdicion!=null}">
+       xmlns:p="http://primefaces.org/ui"
+       xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/WEB-INF/include/template.xhtml">
+        <ui:define name="head">
+            <title>Hello JSF Bootstrap</title>
+            <!-- Custom styles for this template -->
+            <h:outputStylesheet name="css/starter-template.css"/>
+        </ui:define>
+        <ui:define name="body">
+            <nav class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">PencasPro</a>
+                    </div>
+                    <div id="navbar" class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </nav>
+            <div class="container">
+                <div class="starter-template">
+                    <p:panel id="panelPencas" rendered="#{usuarioBean.usuarioEnEdicion!=null}">
                  <h:outputLabel for="usuario" value="Usuario:" />
                  <h:outputLabel  value="#{usuarioBean.usuarioEnEdicion.codigo}" />
                 <p:dataTable var="penca" value="#{usuarioBean.usuarioEnEdicion.pencas}" >
                     <p:column headerText="Pencas">
                         <h:outputText value="#{penca.codigo}" />
                     </p:column>
+                    <p:column headerText="Posición">
+                        <h:outputText value="#{rankingBean.obtenerPosicion(penca)}" />
+                    </p:column>
                     <p:column headerText="Partidos">
-                        <p:link outcome = "/fragmentos/penca" value = "Campeonato">
+                        <p:link outcome = "/fragmentos/penca"  styleClass="glyphicon glyphicon-info-sign">
                             <f:param name = "pk" value = "#{penca.campeonato_fk}" />
                             <f:param name = "pencapk" value = "#{penca.penca_pk}" />
                          </p:link>                        
                     </p:column>
                     <p:column headerText="Ranking">
-                        <p:link outcome = "/fragmentos/ranking" value = "Campeonato">
+                        <p:link outcome = "/fragmentos/ranking" styleClass="glyphicon glyphicon-flag">
                             <f:param name = "pencapk" value = "#{penca.penca_pk}" />
                          </p:link>                        
                     </p:column>
                 </p:dataTable>
             </p:panel>
-        </h:form>
-        <br />
-    </h:body>
+                </div>
+            </div><!-- /.container -->
+        </ui:define>
+    </ui:composition> 
 </html>
 

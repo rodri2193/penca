@@ -12,11 +12,11 @@ import java.io.Serializable;
  * @author notebook
  */
 public class posicion implements Serializable {
-    
+
     private String posicion;
-    
-    public posicion(){
-        
+
+    public posicion() {
+
     }
 
     public String getPosicion() {
@@ -26,7 +26,5 @@ public class posicion implements Serializable {
     public void setPosicion(String posicion) {
         this.posicion = posicion;
     }
-    
-    
-    
+
 }

@@ -11,13 +11,13 @@ import java.io.Serializable;
  *
  * @author notebook
  */
-public class ranking  implements Serializable {
-    
+public class ranking implements Serializable {
+
     private String usuario;
     private Integer puntaje;
-    
-    public ranking(){
-        
+
+    public ranking() {
+
     }
 
     public String getUsuario() {
@@ -27,7 +27,6 @@ public class ranking  implements Serializable {
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
-    
 
     public Integer getPuntaje() {
         return puntaje;
@@ -36,5 +35,5 @@ public class ranking  implements Serializable {
     public void setPuntaje(Integer puntaje) {
         this.puntaje = puntaje;
     }
-    
+
 }

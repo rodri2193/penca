@@ -1,30 +1,58 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" 
-      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:o="http://omnifaces.org/ui">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        <h:outputText value="Posicion:"/>
-        <h:outputText value="#{rankingBean.posicion.posicion}"/>
-        <h:form id="form">
-                <p:dataTable var="ranking" value="#{rankingBean.listRanking}">
-                        <p:column headerText="Usuario">
-                            <h:outputText value="#{ranking.usuario}" />
-                        </p:column>
-                        <p:column headerText="Posicion">
-                            <h:outputText value="#{ranking.puntaje}" />
-                        </p:column>  
-                </p:dataTable>
-            <p:commandButton value="-" update="@form"  action="#{rankingBean.paginadorMenos}" />
-            <p:commandButton value="+" update="@form"  action="#{rankingBean.paginadorMas}" />            
-        </h:form>
-    </h:body>
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/WEB-INF/include/template.xhtml">
+        <ui:define name="head">
+            <title>Hello JSF Bootstrap</title>
+            <!-- Custom styles for this template -->
+            <h:outputStylesheet name="css/starter-template.css"/>
+        </ui:define>
+        <ui:define name="body">
+            <nav class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">PencasPro</a>
+                    </div>
+                    <div id="navbar" class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </nav>
+            <div class="container">
+                <div class="starter-template">
+                    <div class="posicion">
+                        <h3 class="posicion">Posición: #{rankingBean.posicion.posicion}</h3>
+                    </div>
+                    <h:form id="form">
+                        <p:dataTable styleClass="table table-striped" var="ranking"  rowIndexVar="index" value="#{rankingBean.listRanking}">
+                            <p:column headerText="Posición">
+                                <h:outputText value="#{index+1}" />
+                            </p:column>
+                            <p:column headerText="Usuario">
+                                <h:outputText value="#{ranking.usuario}" />
+                            </p:column>
+                            <p:column headerText="Puntaje">
+                                <h:outputText value="#{ranking.puntaje}" />
+                            </p:column>  
+                        </p:dataTable>
+                        <p:commandButton value="-" update="@form"  action="#{rankingBean.paginadorMenos}" />
+                        <p:commandButton value="+" update="@form"  action="#{rankingBean.paginadorMas}" />            
+                    </h:form>
+                </div>
+            </div><!-- /.container -->
+        </ui:define>
+    </ui:composition> 
 </html>
+
 

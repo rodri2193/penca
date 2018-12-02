@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @author notebook
  */
 public class apuestaRealizada implements Serializable {
-    
+
     String penca;
     String usuario;
     String partido;
@@ -20,9 +20,9 @@ public class apuestaRealizada implements Serializable {
     Integer resultado2;
     Integer resultado1;
     Integer scoreDiference;
-    
-    public void apuestaRealizada(){
-        
+
+    public void apuestaRealizada() {
+
     }
 
     public String getPenca() {
@@ -81,9 +81,4 @@ public class apuestaRealizada implements Serializable {
         this.scoreDiference = scoreDiference;
     }
 
-   
-
-    
-    
-    
 }

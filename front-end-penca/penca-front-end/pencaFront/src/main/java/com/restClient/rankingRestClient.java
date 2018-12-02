@@ -29,26 +29,26 @@ import javax.ws.rs.core.Response;
 @Named
 @RequestScoped
 public class rankingRestClient implements Serializable {
-    
-    public rankingRestClient(){
-        
+
+    public rankingRestClient() {
+
     }
-    
-    public posicion buscarPosicionUsuario(String pencaid, String usuarioid){
-         Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(constantes.ranking+"/prod/posusuario/");
-        Response response = target.queryParam("penca", pencaid).queryParam("usuario",usuarioid).request(MediaType.APPLICATION_JSON).get(); 
-        posicion pos=restClient.respond(response, posicion.class);
+
+    public posicion buscarPosicionUsuario(String pencaid, String usuarioid) {
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target(constantes.ranking + "/prod/posusuario/");
+        Response response = target.queryParam("pencaid", pencaid).queryParam("usuario", usuarioid).request(MediaType.APPLICATION_JSON).get();
+        posicion pos = restClient.respond(response, posicion.class);
         client.close();
-        return  pos;
+        return pos;
     }
-    
-    public List<ranking> buscarListaRanking(String pencaid,Integer posdesde,Integer poshasta){
-         Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(constantes.ranking+"/prod/ranking/");
-        Response response = target.queryParam("pencaid", pencaid).queryParam("posdesde",posdesde.toString()).queryParam("poshasta",poshasta.toString()).request(MediaType.APPLICATION_JSON).get(); 
-        ranking[] listapu=restClient.respond(response, ranking[].class);
+
+    public List<ranking> buscarListaRanking(String pencaid, Integer posdesde, Integer poshasta) {
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target(constantes.ranking + "/prod/ranking/");
+        Response response = target.queryParam("pencaid", pencaid).queryParam("posdesde", posdesde.toString()).queryParam("poshasta", poshasta.toString()).request(MediaType.APPLICATION_JSON).get();
+        ranking[] listapu = restClient.respond(response, ranking[].class);
         client.close();
-        return  Arrays.asList(listapu);
+        return Arrays.asList(listapu);
     }
 }

@@ -55,12 +55,11 @@ public class GreetingsBean {
             Logger.getLogger(GreetingsBean.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        
         return "Error";
     }
-    
+
     public String getUsuario() {
-       /* Client client = ClientBuilder.newClient();
+        /* Client client = ClientBuilder.newClient();
 
         WebTarget webTarget = client.target("https://ccdu5kaaeg.execute-api.us-east-1.amazonaws.com/default/usuario");
         
@@ -71,14 +70,14 @@ public class GreetingsBean {
         client.close();
         return usu.getCodigo();*/
         WebTarget webTarget = restClient.getWebTarget("usuario");
-        
-        usuario usu=new usuario();
-        usu = restClient.invokeGet(webTarget,usuario.class,"3");
-        String coso="pum";
-       for(penca p:usu.getPencas()){
-           coso=p.getCodigo();
-       }
-        
+
+        usuario usu = new usuario();
+        usu = restClient.invokeGet(webTarget, usuario.class, "3");
+        String coso = "pum";
+        for (penca p : usu.getPencas()) {
+            coso = p.getCodigo();
+        }
+
         return coso;
     }
 
